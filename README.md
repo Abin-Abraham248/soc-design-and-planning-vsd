@@ -70,7 +70,7 @@ make mount
 package require openlane 1.0.2
 ```
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/f83c45ec488f339de18b7ae7c4b3e916195f4a10/images/01_syn.png)
+![image alt](image/01-synth1.png))
 
 #### Preparing the Design
 
@@ -80,22 +80,22 @@ Before running synthesis, we prepare the design to merge the cell LEF and techno
 prep -design picorv32a
 ```
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/02_syn1.png) -->
+![image alt](image/02-synth2.png) -->
 
 #### Running Synthesis
 
 ```tcl
 run_synthesis
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/03_syn2.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/04_syn3.png)
+![image alt](image/03-synth3.png)
+![image alt](image/04-synth4.png)
 
 After synthesis completes, we can calculate the **flop ratio** — a useful sanity check:
 
 ```
 Flop Ratio = (No. of D Flip-Flops) / (Total No. of Cells)
-           = 1613 / 15762
-           ≈ 0.1023  →  ~10.23%
+           = 1613 / 14876
+           ≈ 0.108  →  ~10.8%
 ```
 ## Day 2 — Floorplanning and Introduction to Library Cells
 
@@ -129,7 +129,7 @@ Input and output pins are placed along the chip boundary. The relative placement
 ```tcl
 run_floorplan
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/05_floorplan.png)
+![image alt](image/05-floorpl1.png)
 
 After this completes, we can inspect the DEF file that was generated:
 
@@ -145,26 +145,22 @@ magic -T /home/vsduser/Desktop/OpenLane/designs/picorv32a/sky130A/libs.tech/magi
       lef read ../../tmp/merged.nom.lef \
       def read picorv32a.def &
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/06_floorplan1.png)
+![image alt](image/06-floorpl2.png)
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/07_floorplan2.png)
-
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/08_floorplan3.png)
-
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/11_floorpln.png)
+![image alt](image/07-floorpln3.png)
 
 #### Running Placement
 
 ```tcl
 run_placement
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/12_placement.png)
+![image alt](image/08-placmnt1.png)
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/13_placement1.png)
+![image alt](image/08-placmnt1.png)
 
 Standard cells legally placed
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/14_placement3.png)
+![image alt](image/10-plcmnt3.png)
 
 ## Day 3 — Design and Characterisation of Library Cells using Magic & ngspice
 
@@ -202,14 +198,10 @@ git clone https://github.com/nickson-jose/vsdstdcelldesign.git
 ```bash
 magic -T sky130A.tech sky130_inv.mag &
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/15_day3.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/16_inv.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/17_inv2.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/18_inv3.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/19_inv4.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/20_inv5.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/21_inv6.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/22_inv7.png)
+![image alt](image/11-inv1.png)
+![image alt](image/12-inv2.png)
+
+
 
 #### Extracting SPICE Netlist from Magic
 
@@ -220,16 +212,15 @@ extract all
 ext2spice cthresh 0 rthresh 0
 ext2spice
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/24_inv9.png)
+![image alt](image/13-inv3.png)
 Screenshot of created spice file
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/25_inv10.png)
+![image alt](image/14-inv4.png)
 
 Editing the spice model file for analysis through simulation.
 
 Measuring unit distance in layout grid
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/26_inv11.png)
 Final edited spice file ready for ngspice simulation
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/27_inv12.png)
+![image alt](image/15-inv6.png)
 #### Running ngspice Simulation
 
 ```bash
@@ -239,9 +230,9 @@ ngspice sky130_inv.spice
 ```ngspice
 plot y vs time a
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/28_inv13.png)
+![image alt](image/16-inv6.png)
 Screenshot of generated plot
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/29_inv14.png)
+![image alt](image/17-inv7.png)
 From the waveform, measure rise time, fall time, and propagation delay values.
 Rise transition time calculation
 
@@ -258,43 +249,27 @@ Fall transition time = Time taken for output to fall to 20% - Time taken for out
 
 80% of output = 2.64 V
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/30_inv15.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/31_inv16.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/32_inv17.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/33_inv18.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/34_inv19.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/35_inv20.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/36_inv21.png)
+![image alt](image/18-inv8.png)
+![image alt](image/19-inv9.png)
+![image alt](image/20-inv10.png)
+![image alt](image/21-inv11.png)
+![image alt](image/22-inv12.png)
+![image alt](image/23-inv13.png)
 
-Incorrectly implemented poly.9 simple rule correction
 
-Screenshot of poly rules
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/37_sky.png)
 Incorrectly implemented poly.9 rule no drc violation even though spacing < 0.48u
 Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
 
 Link to Sky130 Periphery rules: https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/38_sky1.png)
+![image alt](image/24-inv14.png)
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/39_sky2.png)
+![image alt](image/25-inv15.png)
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/40_sky4.png)
+![image alt](image/26-inv16.png)
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/41_sky5.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/42_sky6.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/43_sky7.png)
+![image alt](image/27-inv17.png)
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/44_sky8.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/45_sky9.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/46_sky10.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/47_sky11.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/48_sky12.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/49_sky13.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/50_sky14.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/51_sky15.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/54_sky18.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/53_sky17.png)
 
 ## Day 4 — Pre-Layout Timing Analysis and Clock Tree Synthesis
 
@@ -324,27 +299,26 @@ CTS builds a balanced tree of clock buffers to distribute the clock signal acros
 
 ### Lab — Custom Cell Integration and STA with OpenSTA
 Screenshot of tracks.info of sky130_fd_sc_hd
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/55_day4.1.png)
+![image alt](image/28-inv18.png)
 #### Get syntax for grid command
 help grid
 
 #### Set grid values accordingly
 grid 0.46um 0.34um 0.23um 0.17um
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/57_day4.4.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/56_day4.2.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/58_day4.5.png)
+![image alt](image/28-inv18.png)
+![image alt](image/30-inv20.png)
 Generate lef from the layout.
 
 Command for tkcon window to write lef
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/59_day4.6.png)
+![image alt](image/31-inv21.png)
 
 Screenshot of newly created lef file
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/60_day4.7.png)
+![image alt](image/32-inv22.png)
 
 Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
 
 Commands to copy necessary files to 'picorv32a' design 'src' directory
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/61_day4.8.png)
+![image alt](image/33-inv23.png)
 
 #### Editing `config.tcl` to Include Custom Cell
 
@@ -355,40 +329,25 @@ set ::env(LIB_SLOWEST)    "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd
 set ::env(LIB_TYPICAL)    "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
 set ::env(EXTRA_LEFS)     [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/63_day4.10.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/64_day4.11.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/65_day4.15.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/66_day4.12.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/67_day4.13.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/68_day4.16.png)
-Screenshot of placement def in magic
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/69_day4.17.png)
-Screenshot of custom inverter inserted in placement def with proper abutment
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/70_day4.18.png)
-#### Command to view internal connectivity layers
-expand
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/71_day4.19.png)
+![image alt](image/34-inv24.png)
+![image alt](image/35-inv25.png)
+![image alt](image/36-ivn26.png)
+![image alt](image/37-inv27.png)
 
 #### Running OpenSTA (Pre-CTS Timing)
 Newly created pre_sta.conf for STA analysis in openlane directory
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/72_day4.20.png)
 Newly created my_base.sdc for STA analysis in openlane/designs/picorv32a/src directory based on the file openlane/scripts/base.sdc
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/73_day4.22.png)
 
 ```bash
 sta pre_sta.conf
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/74_day4.21.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/75_day4.23.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/76_day4.24.png)
 
 #### Running CTS
 
 ```tcl
 run_cts
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/78_cts1.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/79_cts2.png)
+
 
 #### Command to run OpenROAD tool
 openroad
@@ -426,9 +385,7 @@ help report_checks
 Generating custom timing report:
 report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/80_cts4.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/81_cts5.png)
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/82_cts6.png)
+
 
 Exit to OpenLANE flow
 exit
@@ -460,13 +417,10 @@ gen_pdn
 ```tcl
 run_routing
 ```
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/83_rout1.png)
 
 
-Screenshots of PDN def
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/85_rout3.png)
 
-![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/86_rout4.png)
+
 
 Common violations to look out for:
 
@@ -518,4 +472,6 @@ A huge thank you to *Kunal Ghosh* (Co-founder, VSD Corp. Pvt. Ltd.) and *Nickson
 - [OpenLANE GitHub](https://github.com/The-OpenROAD-Project/OpenLane)
 - [SkyWater Sky130 PDK](https://github.com/google/skywater-pdk)
 - [vsdstdcelldesign](https://github.com/nickson-jose/vsdstdcelldesign)
+
+
 Documented by Abin Abraham
